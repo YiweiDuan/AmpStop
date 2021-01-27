@@ -1,0 +1,59 @@
+---
+title: "AmpStop"
+author: "Yiwei Duan"
+date: "1/27/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+install.packages("tidyr")
+install.packages("tidyverse")
+install.packages("ggpubr")
+```
+
+```{r}
+install.packages("devtools")
+devtools::install_github("magler1/AmpStop")
+library(AmpStop)
+```
+
+```{r}
+getwd()
+setwd("/Users/yiweiduan/Downloads/AmpStop-master/Testing")
+getwd()
+?get_candidate_oligos   # To get more information about the script and see all options
+get_candidate_oligos(nontarget="Athaliana_ITS1_new_wholelength.fasta", length=30, outfile="Candidate_oligos.fasta")
+?blast_candidate_oligos
+blast_candidate_oligos(blastn_path="/usr/local/ncbi/blast", blastdb="./Unite_s_011217/UNITE_s_011217", candidates="/Users/yiweiduan/Downloads/AmpStop-master/Testing/Candidate_oligos.fasta", outfile = "/Users/yiweiduan/Downloads/AmpStop-master/Testing/Candidates_vs_UNITE.out", percid = 25, wordsize = 7)
+#outfile either can't be written or found, wrong path?"
+```
+
+
+```{r}
+?check_candidate_oligos
+check_candidate_oligos(candidates="/Users/yiweiduan/Downloads/AmpStop-master/Testing/Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
+```
